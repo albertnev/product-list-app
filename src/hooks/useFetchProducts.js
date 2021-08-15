@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getCurrentPage, getProductsPerPage } from '../redux/selectors';
-import fetchProductsList from '../fetchers/fetchProductsList';
+import fetchProductsList from '../api/fetchProductsList';
 
 const useFetchProducts = () => {
   const page = useSelector(getCurrentPage);
