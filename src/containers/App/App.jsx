@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { ProductList } from '..';
+import { ProductList, Cart, Menu } from '..';
 import { getCurrentPage, getProductsPerPage } from '../../redux/selectors';
 import { fetchProducts } from '../../helpers';
 import styles from './AppStyles';
@@ -15,7 +15,9 @@ function App() {
 
   return (
     <div className={styles.appWrapper}>
+      <Menu />
       <ProductList />
+      <Cart />
     </div>
   );
 }
