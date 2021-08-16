@@ -7,7 +7,7 @@ const useFetchProducts = () => {
   const page = useSelector(getCurrentPage);
   const productsPerPage = useSelector(getProductsPerPage);
 
-  const [products, setProducts] = useState({ products: [] });
+  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 

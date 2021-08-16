@@ -1,10 +1,11 @@
 import React from 'react';
 import { ProductInList } from '../../components';
-import useFetchProducts from '../../hooks/useFetchProducts';
+import { useFetchProducts, useViewportSize } from '../../hooks';
 import styles from './ProductListStyles';
 
 const ProductList = () => {
   const [{ products, isLoading, hasError }] = useFetchProducts();
+  const { isMobile } = useViewportSize();
 
   return (
     <>
@@ -15,7 +16,7 @@ const ProductList = () => {
         <ul className={styles.productsListContainer}>
           {products.map((product) => (
             <li key={`product-${product.id}`}>
-              <ProductInList product={product} />
+              <ProductInList product={product} simplifiedView={isMobile} />
             </li>
           ))}
         </ul>

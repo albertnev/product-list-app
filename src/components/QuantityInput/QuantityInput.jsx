@@ -9,15 +9,24 @@ const QuantityInput = ({ onChange, defaultValue }) => {
 
   return (
     <div className={styles.inputWrapper}>
-      <button type="button" onClick={() => changeNumber(defaultValue - 1)}>
+      <button
+        type="button"
+        data-testid="quantity-input-subtract-button"
+        onClick={() => changeNumber(defaultValue - 1)}
+      >
         -
       </button>
       <input
         type="text"
+        data-testid="quantity-input-value-control"
         value={defaultValue}
         onChange={(ev) => changeNumber(ev.target.value)}
       />
-      <button type="button" onClick={() => changeNumber(defaultValue + 1)}>
+      <button
+        type="button"
+        data-testid="quantity-input-add-button"
+        onClick={() => changeNumber(defaultValue + 1)}
+      >
         +
       </button>
     </div>
