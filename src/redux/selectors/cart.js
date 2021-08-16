@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
 export const getCartProducts = (state) => state.cart.products;
+export const getCartProductById = (state, id) => state.cart.products[id];
 export const getCartProductsArray = createSelector(
   getCartProducts,
   (products) => Object.values(products)
