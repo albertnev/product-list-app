@@ -1,14 +1,18 @@
-import React from 'react';
-import { ProductList, Cart, Menu } from '..';
-
+import React, { useState } from 'react';
+import { ProductList, Cart } from '..';
+import { useViewportSize } from '../../hooks';
 import styles from './AppStyles';
 
 function App() {
+  const [currentView, setView] = useState('products');
+  const { isMobile } = useViewportSize();
+
   return (
     <div className={styles.appWrapper}>
-      <Menu />
-      <ProductList />
-      <Cart />
+      {(!isMobile || currentView === 'products') && (
+        <ProductList setView={setView} />
+      )}
+      {(!isMobile || currentView === 'cart') && <Cart setView={setView} />}
     </div>
   );
 }

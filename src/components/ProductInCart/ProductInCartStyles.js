@@ -3,7 +3,7 @@ import { css } from '@emotion/css';
 export default {
   productWrapper: css`
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   `,
   productImage: css`
     width: 80px;
@@ -19,6 +19,9 @@ export default {
   `,
   productName: css`
     flex: 0 0 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   `,
   productPrice: css`
     flex: 0 0 100%;

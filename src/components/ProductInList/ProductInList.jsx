@@ -1,10 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { cx } from '@emotion/css';
 import styles from './ProductInListStyles';
+import { AddToCartButton } from '..';
+import { updateProductQuantity } from '../../redux/actions';
+import { getCartProductById } from '../../redux/selectors';
 
-const ProductInList = ({ product, simplifiedView }) => {
+const ProductInList = ({ product, simplifiedView, onAddToCart }) => {
   const preTestId = 'product-in-list';
+  const dispatch = useDispatch();
+
+  const addProductToCart = () => {
+    if (onAddToCart === undefined) {
+      dispatch(updateProductQuantity(product));
+    } else {
+      onAddToCart(product);
+    }
+  };
+  const productAlreadyInCart = useSelector(
+    (state) => !!getCartProductById(state, product.id)
+  );
 
   return (
     <div className={styles.productWrapper}>
@@ -25,12 +41,20 @@ const ProductInList = ({ product, simplifiedView }) => {
         </span>
       </div>
       <div className={styles.productInfoWrapper}>
-        <div>
+        <div className={styles.productInfo}>
           <span className={styles.productName}>{product.productName}</span>
           <span className={styles.productPrice}>€{product.price}</span>
-          <p className={styles.productDescription}>
-            {product.productDescription}
-          </p>
+          {!simplifiedView ? (
+            <p className={styles.productDescription}>
+              {product.productDescription}
+            </p>
+          ) : (
+            <AddToCartButton
+              className={styles.addToCartButton}
+              alreadyAdded={productAlreadyInCart}
+              onClick={addProductToCart}
+            />
+          )}
         </div>
         {!simplifiedView && (
           <div
@@ -41,13 +65,12 @@ const ProductInList = ({ product, simplifiedView }) => {
               data-testid={`${preTestId}-stock-left`}
               className={styles.productStock}
             >{`${product.stock} left`}</span>
-            <button
-              data-testid={`${preTestId}-add-to-cart-button`}
-              className={styles.productAddButton}
-              type="button"
-            >
-              Add +
-            </button>
+            <AddToCartButton
+              className={styles.addToCartButton}
+              text="Add +"
+              alreadyAdded={productAlreadyInCart}
+              onClick={addProductToCart}
+            />
           </div>
         )}
       </div>
@@ -66,10 +89,12 @@ ProductInList.propTypes = {
     favorite: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }).isRequired,
   simplifiedView: PropTypes.bool,
+  onAddToCart: PropTypes.func,
 };
 
 ProductInList.defaultProps = {
   simplifiedView: false,
+  onAddToCart: undefined,
 };
 
 export default ProductInList;

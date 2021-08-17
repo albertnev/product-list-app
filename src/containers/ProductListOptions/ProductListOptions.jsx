@@ -2,15 +2,15 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProductsPerPage } from '../../redux/actions';
 import { getProductsPerPage } from '../../redux/selectors';
-import styles from './MenuStyles';
+import styles from './ProductListOptionsStyles';
 
-const Menu = () => {
+const ProductListOptions = () => {
   const dispatch = useDispatch();
   const productsPerPage = useSelector(getProductsPerPage);
   const availableLimits = [10, 20, 30, 50, 100];
 
   return (
-    <div className={styles.menuContainer}>
+    <div className={styles.optionsContainer}>
       {/* eslint-disable-next-line jsx-a11y/no-onchange */}
       <select
         defaultValue={productsPerPage}
@@ -28,4 +28,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default ProductListOptions;

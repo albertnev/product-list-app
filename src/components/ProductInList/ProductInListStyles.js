@@ -10,16 +10,17 @@ export default {
   productInfoWrapper: css`
     padding: 8px;
   `,
+  productInfo: css`
+    display: flex;
+    flex-wrap: wrap;
+  `,
   productName: css`
     display: inline-block;
-    width: 100%;
+    flex: 0 0 100%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     font-weight: normal;
-  `,
-  productDescription: css`
-    display: none;
   `,
   productImage: css`
     width: 100%;
@@ -43,7 +44,7 @@ export default {
     color: #0c6eb3;
     font-size: 105%;
   `,
-  cartInfo: css`
-    display: none;
+  addToCartButton: css`
+    margin-left: auto;
   `,
 };
