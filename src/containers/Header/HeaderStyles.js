@@ -4,7 +4,9 @@ export default {
   header: css`
     display: grid;
     background-color: white;
-    grid-template-columns: 1fr repeat(3, auto) 1fr;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 16px;
   `,
   title: css`
     font-size: 135%;

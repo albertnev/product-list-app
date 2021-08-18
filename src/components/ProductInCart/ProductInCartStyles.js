@@ -8,6 +8,7 @@ export default {
   productImage: css`
     width: 80px;
     height: 80px;
+    flex-shrink: 0;
     background-position: center;
     background-size: cover;
   `,
@@ -26,5 +27,6 @@ export default {
   productPrice: css`
     flex: 0 0 100%;
     text-align: right;
+    color: #0c6eb3;
   `,
 };

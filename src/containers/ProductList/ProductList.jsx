@@ -14,18 +14,22 @@ const ProductList = ({ setView }) => {
     <>
       <Header title="Products" icon="🛒" onClick={() => setView('cart')} />
       <ProductListOptions />
-      {hasError && <div>Something went wrong...</div>}
-      {isLoading ? (
-        <div>IsLoading</div>
-      ) : (
-        <ul className={styles.productsListContainer}>
-          {products.map((product) => (
-            <li key={`product-${product.id}`}>
-              <ProductInList product={product} simplifiedView={isMobile} />
-            </li>
-          ))}
-        </ul>
-      )}
+      <section className={styles.contentWrapper}>
+        {hasError && <div>Something went wrong...</div>}
+        {isLoading ? (
+          <div>IsLoading</div>
+        ) : (
+          <div className={styles.productListWrapper}>
+            <ul className={styles.productsListContainer}>
+              {products.map((product) => (
+                <li key={`product-${product.id}`}>
+                  <ProductInList product={product} simplifiedView={isMobile} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
     </>
   );
 };

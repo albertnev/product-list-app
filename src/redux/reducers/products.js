@@ -1,4 +1,4 @@
-import { SET_PRODUCTS_PER_PAGE } from '../actions';
+import { SET_PRODUCTS_PER_PAGE, SET_CURRENT_PAGE } from '../actions';
 
 const initialState = {
   productsList: {},
@@ -14,6 +14,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         productsPerPage: action.productsPerPage,
+      };
+    }
+
+    case SET_CURRENT_PAGE: {
+      let nextPage = parseInt(action.page, 10);
+      if (nextPage < 1) nextPage = 1;
+
+      return {
+        ...state,
+        currentPage: nextPage,
       };
     }
 

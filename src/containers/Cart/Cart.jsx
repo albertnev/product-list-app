@@ -13,19 +13,26 @@ const Cart = ({ setView }) => {
   return (
     <>
       <Header title="Cart" icon="📋" onClick={() => setView('products')} />
-      <div className={styles.cartWrapper}>
-        <ul className={styles.productListContainer}>
-          {productsInCart.map((product) => (
-            <li key={`cart-product-${product.id}`}>
-              <ProductInCart product={product} />
-            </li>
-          ))}
-        </ul>
-        <div>
-          <span>Total Amount:</span>
-          <span>{cartTotal}</span>
+      <section className={styles.cartWrapper}>
+        <div className={styles.productListWrapper}>
+          <ul className={styles.productList}>
+            {productsInCart.map((product) => (
+              <li key={`cart-product-${product.id}`}>
+                <ProductInCart product={product} />
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
+        <footer className={styles.cartFooter}>
+          <div className={styles.cartTotalWrapper}>
+            <span className={styles.totalAmountTitle}>Total Amount:</span>
+            <span className={styles.cartTotal}>€{cartTotal.toFixed(2)}</span>
+          </div>
+          <div className={styles.buttonWrapper}>
+            <button type="button">Make a payment</button>
+          </div>
+        </footer>
+      </section>
     </>
   );
 };
