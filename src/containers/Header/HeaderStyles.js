@@ -15,6 +15,13 @@ export default {
   `,
   icon: css`
     font-size: 120%;
+    background: none;
+    border: none;
+  `,
+  iconRight: css`
     margin-left: auto;
+  `,
+  iconLeft: css`
+    margin-right: auto;
   `,
 };

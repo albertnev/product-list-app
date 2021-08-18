@@ -17,6 +17,7 @@ export default {
     flex-wrap: wrap;
     padding-left: 16px;
     flex-grow: 1;
+    min-width: 0;
   `,
   productName: css`
     flex: 0 0 100%;

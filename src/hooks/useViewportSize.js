@@ -9,7 +9,7 @@ const useViewportSize = () => {
     return () => window.removeEventListener('resize', handleWindowResize);
   }, []);
 
-  return { width, isMobile: width <= 480 };
+  return { width, isMobile: width <= 520 };
 };
 
 export default useViewportSize;

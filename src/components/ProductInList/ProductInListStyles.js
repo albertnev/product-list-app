@@ -10,6 +10,10 @@ export default {
   productInfoWrapper: css`
     padding: 8px;
   `,
+  productDescription: css`
+    height: 60px;
+    margin-bottom: 32px;
+  `,
   productInfo: css`
     display: flex;
     flex-wrap: wrap;
@@ -21,6 +25,11 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis;
     font-weight: normal;
+
+    @media (min-width: 520px) {
+      flex: 0 0 70%;
+      font-size: 110%;
+    }
   `,
   productImage: css`
     width: 100%;
@@ -31,6 +40,10 @@ export default {
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
+
+    @media (min-width: 520px) {
+      height: 120px;
+    }
   `,
   productFavIcon: css`
     font-size: 150%;
@@ -43,8 +56,29 @@ export default {
   productPrice: css`
     color: #0c6eb3;
     font-size: 105%;
+
+    @media (min-width: 520px) {
+      flex: 0 0 30%;
+      text-align: right;
+    }
   `,
   addToCartButton: css`
     margin-left: auto;
+
+    @media (min-width: 520px) {
+      font-size: 100%;
+      background-color: #b30037;
+      border-radius: 4px;
+      padding: 5px 10px;
+      border: none;
+      color: white;
+    }
+  `,
+  productStock: css`
+    font-style: italic;
+  `,
+  cartInfo: css`
+    display: flex;
+    align-items: center;
   `,
 };

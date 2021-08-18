@@ -1,11 +1,23 @@
 import { css } from '@emotion/css';
 
 export default {
+  pageContainer: css`
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+
+    @media (min-width: 520px) {
+      border-left: 1px solid lightgrey;
+      flex: 1 1 30%;
+    }
+  `,
   cartWrapper: css`
     display: flex;
     flex-direction: column;
     background-color: white;
     padding: 16px;
+    padding-right: 24px;
     flex-grow: 1;
     overflow: hidden;
   `,

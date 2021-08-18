@@ -1,6 +1,16 @@
 import { css } from '@emotion/css';
 
 export default {
+  pageContainer: css`
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+
+    @media (min-width: 520px) {
+      flex: 1 1 70%;
+    }
+  `,
   contentWrapper: css`
     flex-grow: 1;
     display: flex;
@@ -23,6 +33,11 @@ export default {
       box-sizing: border-box;
       padding: 8px;
       width: 50%;
+
+      @media (min-width: 520px) {
+        padding: 16px;
+        flex: 1 1 280px;
+      }
     }
   `,
 };

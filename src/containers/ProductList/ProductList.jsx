@@ -11,8 +11,13 @@ const ProductList = ({ setView }) => {
   const { isMobile } = useViewportSize();
 
   return (
-    <>
-      <Header title="Products" icon="🛒" onClick={() => setView('cart')} />
+    <div className={styles.pageContainer}>
+      <Header
+        title="Products"
+        icon={(isMobile && '>') || null}
+        iconPosition="right"
+        onClick={() => setView('cart')}
+      />
       <ProductListOptions />
       <section className={styles.contentWrapper}>
         {hasError && <div>Something went wrong...</div>}
@@ -30,7 +35,7 @@ const ProductList = ({ setView }) => {
           </div>
         )}
       </section>
-    </>
+    </div>
   );
 };
 

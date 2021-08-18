@@ -3,16 +3,23 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { getCartProductsArray, getCartTotalPrice } from '../../redux/selectors';
 import { Header } from '../Header';
+import { useViewportSize } from '../../hooks';
 import { ProductInCart } from '../../components';
 import styles from './CartStyles';
 
 const Cart = ({ setView }) => {
   const productsInCart = useSelector(getCartProductsArray);
   const cartTotal = useSelector(getCartTotalPrice);
+  const { isMobile } = useViewportSize();
 
   return (
-    <>
-      <Header title="Cart" icon="📋" onClick={() => setView('products')} />
+    <div className={styles.pageContainer}>
+      <Header
+        title="Cart"
+        icon={(isMobile && '<') || null}
+        iconPosition="left"
+        onClick={() => setView('products')}
+      />
       <section className={styles.cartWrapper}>
         <div className={styles.productListWrapper}>
           <ul className={styles.productList}>
@@ -33,7 +40,7 @@ const Cart = ({ setView }) => {
           </div>
         </footer>
       </section>
-    </>
+    </div>
   );
 };
 

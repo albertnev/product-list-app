@@ -6,14 +6,14 @@ import styles from './AddToCartButtonStyles';
 const AddToCartButton = ({ alreadyAdded, onClick, text, className }) => (
   <>
     {alreadyAdded ? (
-      <div className={cx(className, styles.alreadyAddedSign)}>
+      <div className={cx(styles.alreadyAddedSign, className)}>
         <span>✓</span>
       </div>
     ) : (
       <button
         data-testid="add-to-cart-button"
         onClick={onClick}
-        className={cx(className, styles.productAddButton)}
+        className={cx(styles.productAddButton, className)}
         type="button"
       >
         {text}

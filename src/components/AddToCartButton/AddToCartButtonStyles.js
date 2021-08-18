@@ -2,6 +2,7 @@ import { css } from '@emotion/css';
 
 export default {
   productAddButton: css`
+    cursor: pointer;
     border: none;
     background: transparent;
     line-height: 100%;
@@ -10,6 +11,7 @@ export default {
   `,
   alreadyAddedSign: css`
     color: white;
+    line-height: 100%;
     background-color: green;
     text-align: center;
     vertical-align: middle;

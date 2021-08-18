@@ -42,11 +42,18 @@ const ProductInList = ({ product, simplifiedView, onAddToCart }) => {
       </div>
       <div className={styles.productInfoWrapper}>
         <div className={styles.productInfo}>
-          <span className={styles.productName}>{product.productName}</span>
+          <span className={styles.productName} title={product.productName}>
+            {product.productName}
+          </span>
           <span className={styles.productPrice}>€{product.price}</span>
           {!simplifiedView ? (
-            <p className={styles.productDescription}>
-              {product.productDescription}
+            <p
+              className={styles.productDescription}
+              title={product.productDescription}
+            >
+              {product.productDescription.length > 120
+                ? `${product.productDescription.substr(0, 120)}...`
+                : product.productDescription}
             </p>
           ) : (
             <AddToCartButton

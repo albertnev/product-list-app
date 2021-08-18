@@ -19,7 +19,9 @@ const ProductInCart = ({ product }) => {
         title={product.productName}
       />
       <div className={styles.productInfo}>
-        <span className={styles.productName}>{product.productName}</span>
+        <span className={styles.productName} title={product.productName}>
+          {product.productName}
+        </span>
         <span className={styles.productPrice}>€{product.price}</span>
         <QuantityInput
           defaultValue={product.cartQuantity}
