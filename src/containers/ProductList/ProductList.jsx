@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ProductInList } from '../../components';
+import { ProductInList, Loader } from '../../components';
 import { ProductListOptions } from '../ProductListOptions';
 import { Header } from '../Header';
 import { useFetchProducts, useViewportSize } from '../../hooks';
@@ -20,9 +20,15 @@ const ProductList = ({ setView }) => {
       />
       <ProductListOptions />
       <section className={styles.contentWrapper}>
-        {hasError && <div>Something went wrong...</div>}
+        {hasError && (
+          <div className={styles.errorMessage}>
+            Something went wrong.
+            <br />
+            Please, try to refresh the page.
+          </div>
+        )}
         {isLoading ? (
-          <div>IsLoading</div>
+          <Loader />
         ) : (
           <div className={styles.productListWrapper}>
             <ul className={styles.productsListContainer}>
