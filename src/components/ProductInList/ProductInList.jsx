@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { cx } from '@emotion/css';
 import styles from './ProductInListStyles';
-import { AddToCartButton } from '..';
+import { AddToCartButton } from '../AddToCartButton';
 import { updateProductQuantity } from '../../redux/actions';
 import { getCartProductById } from '../../redux/selectors';
 

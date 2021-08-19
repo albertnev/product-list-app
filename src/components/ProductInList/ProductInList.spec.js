@@ -1,9 +1,10 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '../../test-utils';
 import { ProductInList } from '..';
 import productList from '../../test-utils/mocks/productList.json';
 
 describe('Component: ProductInList', () => {
+  let rerender;
   const defaultProduct = productList[0];
   const renderComponent = ({
     product = defaultProduct,
@@ -12,46 +13,65 @@ describe('Component: ProductInList', () => {
     render(<ProductInList product={product} simplifiedView={simplifiedView} />);
 
   describe('Normal view', () => {
+    beforeEach(() => {
+      ({ rerender } = renderComponent());
+    });
+
     test('renders the product image', () => {
-      const { getByTestId } = renderComponent();
-      const imageContainer = getByTestId('product-in-list-image');
+      const imageContainer = screen.getByTestId('product-in-list-image');
       expect(imageContainer).toHaveStyle(
         `background-image: url("${defaultProduct.image_url}")`
       );
     });
 
     test('renders the fav icon highlighted when the product is marked as favorite', () => {
-      const { getByTestId } = renderComponent({
-        product: { ...defaultProduct, favorite: 1 },
-      });
-      expect(getByTestId('product-in-list-fav-icon')).toHaveStyle('color: red');
+      const favProduct = { ...defaultProduct, favorite: 1 };
+      rerender(<ProductInList product={favProduct} />);
+      expect(screen.getByTestId('product-in-list-fav-icon')).toHaveStyle(
+        'color: red'
+      );
     });
 
     test('renders the product basic information', () => {
-      const { getByText } = renderComponent();
-      expect(getByText(defaultProduct.productName)).toBeInTheDocument();
-      expect(getByText(`€${defaultProduct.price}`)).toBeInTheDocument();
-      expect(getByText(defaultProduct.productDescription)).toBeInTheDocument();
+      expect(screen.getByText(defaultProduct.productName)).toBeInTheDocument();
+      expect(screen.getByText(`€${defaultProduct.price}`)).toBeInTheDocument();
     });
 
-    test('renders the stock and the add button', () => {
-      const { getByTestId } = renderComponent();
-      expect(getByTestId('product-in-list-stock-left')).toBeInTheDocument();
+    test('renders a short product description if it is larger than 120 characters', () => {
       expect(
-        getByTestId('product-in-list-add-to-cart-button')
+        screen.getByText(
+          `${defaultProduct.productDescription.substr(0, 120)}...`
+        )
+      ).toBeInTheDocument();
+    });
+
+    test('renders the stock', () => {
+      expect(
+        screen.getByTestId('product-in-list-stock-left')
       ).toBeInTheDocument();
     });
   });
 
   describe('Simplified view', () => {
-    test('does not render the stock nor the add button', () => {
-      const { queryByTestId } = renderComponent({ simplifiedView: true });
+    beforeEach(() => {
+      renderComponent({
+        simplifiedView: true,
+      });
+    });
+
+    test('renders the product basic information except for the description', () => {
+      expect(screen.getByText(defaultProduct.productName)).toBeInTheDocument();
+      expect(screen.getByText(`€${defaultProduct.price}`)).toBeInTheDocument();
       expect(
-        queryByTestId('product-in-list-stock-left')
+        screen.queryByText(defaultProduct.productDescription)
       ).not.toBeInTheDocument();
+    });
+
+    test('does not render the stock but renders the add button', () => {
       expect(
-        queryByTestId('product-in-list-add-to-cart-button')
+        screen.queryByTestId('product-in-list-stock-left')
       ).not.toBeInTheDocument();
+      expect(screen.queryByTestId('add-to-cart-button')).toBeInTheDocument();
     });
   });
 });
