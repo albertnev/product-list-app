@@ -4,8 +4,9 @@ import { cx } from '@emotion/css';
 import styles from './HeaderStyles';
 
 const Header = ({ title, icon, iconPosition, onClick }) => {
-  const iconButton = (positionClass) => (
+  const iconButton = (positionClass, testId) => (
     <button
+      data-testid={testId}
       type="button"
       className={cx(styles.icon, positionClass)}
       onClick={onClick}
@@ -16,9 +17,13 @@ const Header = ({ title, icon, iconPosition, onClick }) => {
 
   return (
     <div className={styles.header}>
-      {icon && iconPosition === 'left' && iconButton(styles.iconLeft)}
+      {icon &&
+        iconPosition === 'left' &&
+        iconButton(styles.iconLeft, 'header-icon-left')}
       <h1 className={styles.title}>{title}</h1>
-      {icon && iconPosition === 'right' && iconButton(styles.iconRight)}
+      {icon &&
+        iconPosition === 'right' &&
+        iconButton(styles.iconRight, 'header-icon-right')}
     </div>
   );
 };

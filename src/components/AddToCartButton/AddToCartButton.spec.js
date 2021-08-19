@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { render, screen } from '../../test-utils';
 import { AddToCartButton } from '..';
 
 describe('Component: AddToCartButton', () => {
@@ -23,8 +23,10 @@ describe('Component: AddToCartButton', () => {
   });
 
   describe('product has not been added to the product cart yet', () => {
+    let rerender;
+
     beforeEach(() => {
-      render(<AddToCartButton onClick={onClickFn} />);
+      ({ rerender } = render(<AddToCartButton onClick={onClickFn} />));
     });
 
     test('renders the button if product has not been added yet', () => {
@@ -35,6 +37,13 @@ describe('Component: AddToCartButton', () => {
       const addButton = screen.getByTestId('add-to-cart-button');
       userEvent.click(addButton);
       expect(onClickFn).toHaveBeenCalled();
+    });
+
+    test('does not call the onClick method if it is disabled', () => {
+      rerender(<AddToCartButton onClick={onClickFn} disabled />);
+      const addButton = screen.getByTestId('add-to-cart-button');
+      userEvent.click(addButton);
+      expect(onClickFn).not.toHaveBeenCalled();
     });
   });
 });

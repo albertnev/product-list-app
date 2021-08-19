@@ -50,6 +50,20 @@ describe('Component: ProductInList', () => {
         screen.getByTestId('product-in-list-stock-left')
       ).toBeInTheDocument();
     });
+
+    test('renders the add button as enabled if the product has stock', () => {
+      expect(screen.getByTestId('add-to-cart-button')).not.toHaveAttribute(
+        'disabled'
+      );
+    });
+
+    test('renders the add button as disabled if the product has no stock', () => {
+      const nostockProduct = { ...defaultProduct, stock: 0 };
+      rerender(<ProductInList product={nostockProduct} />);
+      expect(screen.getByTestId('add-to-cart-button')).toHaveAttribute(
+        'disabled'
+      );
+    });
   });
 
   describe('Simplified view', () => {

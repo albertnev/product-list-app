@@ -14,6 +14,7 @@ const ProductInCart = ({ product }) => {
   return (
     <div className={styles.productWrapper}>
       <div
+        data-testid="product-in-list-image"
         className={styles.productImage}
         style={{ backgroundImage: `url("${product.image_url}")` }}
         title={product.productName}
