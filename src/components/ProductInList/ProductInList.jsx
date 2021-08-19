@@ -58,6 +58,7 @@ const ProductInList = ({ product, simplifiedView, onAddToCart }) => {
           ) : (
             <AddToCartButton
               className={styles.addToCartButton}
+              disabled={product.stock === 0}
               alreadyAdded={productAlreadyInCart}
               onClick={addProductToCart}
             />
@@ -75,6 +76,7 @@ const ProductInList = ({ product, simplifiedView, onAddToCart }) => {
             <AddToCartButton
               className={styles.addToCartButton}
               text="Add +"
+              disabled={product.stock === 0}
               alreadyAdded={productAlreadyInCart}
               onClick={addProductToCart}
             />

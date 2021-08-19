@@ -25,6 +25,7 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis;
     font-weight: normal;
+    margin-bottom: 8px;
 
     @media (min-width: 520px) {
       flex: 0 0 70%;
@@ -66,8 +67,8 @@ export default {
     margin-left: auto;
 
     @media (min-width: 520px) {
-      font-size: 100%;
       background-color: #b30037;
+      font-size: 100%;
       border-radius: 4px;
       padding: 5px 10px;
       border: none;

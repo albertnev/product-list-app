@@ -7,17 +7,22 @@ export default {
     background: transparent;
     line-height: 100%;
     font-size: 130%;
-    color: grey;
+    color: #b30037;
+
+    &[disabled] {
+      opacity: 0.3;
+      cursor: auto;
+    }
   `,
   alreadyAddedSign: css`
     color: white;
     line-height: 100%;
-    background-color: green;
     text-align: center;
+    background-color: #b30037;
     vertical-align: middle;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     opacity: 0.6;
   `,
 };
