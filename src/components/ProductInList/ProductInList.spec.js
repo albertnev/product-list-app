@@ -1,16 +1,22 @@
 import React from 'react';
-import { render, screen } from '../../test-utils';
+import userEvent from '@testing-library/user-event';
+import { render, screen, waitFor } from '../../test-utils';
 import { ProductInList } from '..';
 import productList from '../../test-utils/mocks/productList.json';
 
 describe('Component: ProductInList', () => {
   let rerender;
+
   const defaultProduct = productList[0];
   const renderComponent = ({
     product = defaultProduct,
     simplifiedView = false,
   } = {}) =>
     render(<ProductInList product={product} simplifiedView={simplifiedView} />);
+
+  beforeAll(() => {
+    jest.spyOn(window, 'fetch');
+  });
 
   describe('Normal view', () => {
     beforeEach(() => {
@@ -62,6 +68,24 @@ describe('Component: ProductInList', () => {
       rerender(<ProductInList product={nostockProduct} />);
       expect(screen.getByTestId('add-to-cart-button')).toHaveAttribute(
         'disabled'
+      );
+    });
+
+    test.skip('makes a fetch call and updates product favorite when favorite icon is clicked', async () => {
+      const favButton = screen.getByTestId('product-in-list-fav-icon');
+      userEvent.click(favButton);
+      window.fetch.mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ id: defaultProduct.id, favorite: 1 }),
+      });
+
+      await waitFor(() => expect(favButton).toHaveStyle('color: red'));
+      expect(window.fetch).toHaveBeenCalledWith(
+        `http://localhost:3000/grocery/${defaultProduct.id}`,
+        expect.objectContaining({
+          body: JSON.stringify({ favorite: 1 }),
+          method: 'PATCH',
+        })
       );
     });
   });

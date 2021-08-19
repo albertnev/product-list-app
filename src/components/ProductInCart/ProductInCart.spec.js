@@ -4,7 +4,7 @@ import { ProductInCart } from '..';
 import productList from '../../test-utils/mocks/productList.json';
 
 describe('Component: ProductInCart', () => {
-  const defaultProduct = productList[0];
+  const defaultProduct = { ...productList[0], cartQuantity: 1 };
 
   beforeEach(() => {
     render(<ProductInCart product={defaultProduct} />);
