@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { cx } from '@emotion/css';
@@ -6,10 +6,21 @@ import styles from './ProductInListStyles';
 import { AddToCartButton } from '../AddToCartButton';
 import { updateProductQuantity } from '../../redux/actions';
 import { getCartProductById } from '../../redux/selectors';
+import updateProduct from '../../api/updateProduct';
 
 const ProductInList = ({ product, simplifiedView, onAddToCart }) => {
   const preTestId = 'product-in-list';
   const dispatch = useDispatch();
+  const [isFavorite, setIsFavorite] = useState(parseInt(product.favorite, 10));
+
+  const toggleFavorite = async () => {
+    const updateResponse = await updateProduct({
+      productId: product.id,
+      changes: { favorite: isFavorite ? 0 : 1 },
+    });
+    const newProduct = await updateResponse.json();
+    setIsFavorite(parseInt(newProduct.favorite, 10));
+  };
 
   const addProductToCart = () => {
     if (onAddToCart === undefined) {
@@ -30,15 +41,17 @@ const ProductInList = ({ product, simplifiedView, onAddToCart }) => {
         style={{ backgroundImage: `url("${product.image_url}")` }}
         title={product.productName}
       >
-        <span
+        <button
+          type="button"
           data-testid={`${preTestId}-fav-icon`}
           className={cx({
             [styles.productFavIcon]: true,
-            [styles.productIsFav]: parseInt(product.favorite, 10),
+            [styles.productIsFav]: isFavorite,
           })}
+          onClick={toggleFavorite}
         >
           ♥
-        </span>
+        </button>
       </div>
       <div className={styles.productInfoWrapper}>
         <div className={styles.productInfo}>

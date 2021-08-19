@@ -50,6 +50,8 @@ export default {
     font-size: 150%;
     color: white;
     margin-right: 10px;
+    background: transparent;
+    border: none;
   `,
   productIsFav: css`
     color: red;

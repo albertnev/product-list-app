@@ -3,6 +3,9 @@ export default async ({ productId, changes }) => {
 
   return fetch(productsUrl, {
     method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify({ ...changes }),
   });
 };
